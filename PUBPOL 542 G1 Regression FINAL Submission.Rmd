@@ -1,5 +1,5 @@
 ---
-title: PUBPOL-542-G1-Regression
+title: "PUBPOL-542-G1-Regression"
 ---
 ### Linear Regression of School Data in R
 ##### Group 1: PUBPOL 542
