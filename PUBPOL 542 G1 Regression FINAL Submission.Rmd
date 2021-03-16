@@ -23,7 +23,7 @@ summary(fromPy)
     + Note: With loading this library (and loading all future libraries) remove the "#" and run if you have not yet loaded this library in your Rstudio.
 
 ```{r}
-library(dplyr)
+#library(dplyr)
 ```
 
 3. Now, we will format our column labels so they are more R-Friendly, then call the summary to double-check our changes.
@@ -91,7 +91,7 @@ anova(gauss1, gauss2, gauss3, test="Chisq")
 
 ```{r}
 #install.packages("rsq")
-library(rsq)
+#library(rsq)
 ```
 
 Run the R-squared calculations:
@@ -102,7 +102,7 @@ rsq(gauss2)
 rsq(gauss3)
 ```
 
->Comments on Linear Regression: models 2 and 3 had a much higher r-squared than model 1, so our choice will fall between those two.  Model 3 was chosen because it predicts the variance in our outcome similarly to Model 2, and does so without the need for an additional categorical predictor (thus improving our n:p ratio.) Model 3 will be used going forward.  
+>Comments on Linear Regression: models 2 and 3 had a much higher r-squared than model 1, so our choice will fall between those two.  Model 3 was chosen because it predicts the variance in our outcome similarly to Model 2. Model 3 will be used going forward.  
 
 #### Visualizing Our Model
 ***
@@ -113,8 +113,8 @@ then plotted just the linear components (cplot) for "expenditure", "white", and
 These are all useful visualizations for my model.  
 
 ```{r}
-library(dotwhisker)
-library(margins)
+#library(dotwhisker)
+#library(margins)
 ```
 Let's run our plots now:
 ```{r}
