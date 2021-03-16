@@ -1,3 +1,6 @@
+---
+title: PUBPOL-542-G1-Regression
+---
 ### Linear Regression of School Data in R
 ##### Group 1: PUBPOL 542
 ***
@@ -9,7 +12,9 @@
 ```{r}
 df <- readRDS(gzcon(url(
   "https://github.com/PUBPOL-542-Group-1-Project/Merging-Dataframes/raw/main/datafiles/finaldata.RDS")))
-summary(df)
+
+fromPy <- df
+summary(fromPy)
 ```
 #### Reformatting for R
 ***  
@@ -18,7 +23,7 @@ summary(df)
     + Note: With loading this library (and loading all future libraries) remove the "#" and run if you have not yet loaded this library in your Rstudio.
 
 ```{r}
-#library(dplyr)
+library(dplyr)
 ```
 
 3. Now, we will format our column labels so they are more R-Friendly, then call the summary to double-check our changes.
@@ -27,11 +32,8 @@ summary(df)
 ```{r}
 fromPy3 <- fromPy %>% rename(LowIncome = "Low-Income") %>% 
   rename(AllStudents = "All Students") %>% 
-  rename(ELL = "English Language Learners") %>%
-  rename(LowIncomeP = "Low-Income.p") %>%
-  rename(MaleP = "Male.p") %>%
-  rename(WhiteP = "White.p") %>%
-  rename(ELLP = ELL.p)
+  rename(ELL = "English Language Learners")
+
 summary(fromPy3)
 ```
 #### Hypotheses, Regression, Correlations, ANOVA/Rsquared
@@ -40,9 +42,9 @@ summary(fromPy3)
 1. Now onto the actual regression.  I set up three separate hypotheses for my three future regressions.
 
 ```{r}
-hypo1=formula(Graduate ~ LowIncome + DisciplineInt)
+hypo1=formula(Graduate ~ LowIncome)
 
-hypo2=formula(Graduate ~ LowIncome + DisciplineInt + White + Expenditure)
+hypo2=formula(Graduate ~ LowIncome + Expenditure)
 
 hypo3=formula(Graduate ~ LowIncome + White + Expenditure)
 ```
@@ -89,7 +91,12 @@ anova(gauss1, gauss2, gauss3, test="Chisq")
 
 ```{r}
 #install.packages("rsq")
-#library(rsq)
+library(rsq)
+```
+
+Run the R-squared calculations:
+
+```{r}
 rsq(gauss1)
 rsq(gauss2)
 rsq(gauss3)
@@ -106,14 +113,17 @@ then plotted just the linear components (cplot) for "expenditure", "white", and
 These are all useful visualizations for my model.  
 
 ```{r}
-#library(dotwhisker)
+library(dotwhisker)
+library(margins)
+```
+Let's run our plots now:
+```{r}
 dwplot(gauss3,by_2sd = F)
-#library(margins)
+
 cplot(gauss3, 'Expenditure')
 cplot(gauss3, 'White')
 cplot(gauss3, 'LowIncome')
 persp(gauss3)
-
 ```
 
 #### Confirmation of Computed Predictors
